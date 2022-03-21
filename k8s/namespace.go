@@ -3,8 +3,6 @@ package k8sUtils
 import (
 	"bytes"
 	"os"
-
-	fileUtils "github.com/lipence/utils/file"
 )
 
 var nameSpace string
@@ -13,7 +11,7 @@ const EnvNameSpace = "POD_NAMESPACE"
 const PathNameSpaceFile = "/var/run/secrets/kubernetes.io/serviceaccount/namespace"
 
 func init() {
-	if data, err := fileUtils.Content(PathNameSpaceFile); err == nil {
+	if data, err := os.ReadFile(PathNameSpaceFile); err == nil {
 		nameSpace = string(bytes.TrimSpace(data))
 	}
 }
