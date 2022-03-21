@@ -56,7 +56,7 @@ func List(path string, pattern *regexp.Regexp, recursion bool) (list []string, e
 		if fileInfo, err = f.Info(); err != nil {
 			return nil, err
 		}
-		if fileInfo.Mode()|os.ModeSymlink > 0 {
+		if fileInfo.Mode()&os.ModeSymlink > 0 {
 			var realPath string
 			if realPath, err = os.Readlink(filePath); err != nil {
 				return nil, fmt.Errorf("%w (path: %s)", err, f.Name())
